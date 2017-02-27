@@ -4,9 +4,17 @@
         <servlet-name>gainInfo</servlet-name>
         <servlet-class>gainInfo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addInfo</servlet-name>
+        <servlet-class>addInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>gainInfo</servlet-name>
         <url-pattern>/gainInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addInfo</servlet-name>
+        <url-pattern>/addInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
