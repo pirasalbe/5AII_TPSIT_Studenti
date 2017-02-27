@@ -87,7 +87,8 @@ public class addInfo extends HttpServlet {
                 out.println("<p>Storico</p>");
             } else if(request.getParameter("scuole")!=null){
                 out.println("<p>Scuole</p>");
-                query="insert into scuola(nome, provincia, regione) values('" + request.getParameter("nome") + "','" + request.getParameter("provincia") + "','" + request.getParameter("regione") + "')";
+                query="insert into scuola(nome, provincia, regione) values('" + request.getParameter("nome") + "','" + request.getParameter("provincia") + "','" + request.getParameter("regione") + "');";
+                out.println(query);
             }
             
             rset = smt.executeQuery(query);
@@ -95,7 +96,7 @@ public class addInfo extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         } catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         } finally {
             try {
             //step 7 libero le risorse occupate
