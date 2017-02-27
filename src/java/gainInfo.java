@@ -57,7 +57,9 @@ public class gainInfo extends HttpServlet {
             if(request.getParameter("iscritti")!=null){
                 query="select * from storico so inner join studenti si on so.studente=si.cod where scuola='" + request.getParameter("scuola") + "' and anno='" + request.getParameter("anno") + "'";
                 scuola=false;
-            }
+                out.println("<p>Storico</p>");
+            } else 
+                out.println("<p>Scuole</p>");
             
             rset = smt.executeQuery(query);
 
