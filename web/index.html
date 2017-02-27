@@ -6,11 +6,17 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Gain information</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <form action="gainInfo">
+            <p> Provincia: <input name="provincia" type="text"></p>            
+            <input type="submit" name="scuole" value="Cerca"><br>
+            <p> Scuola: <input name="scuola" type="text"></p>        
+            <p> Anno: <input name="anno" type="text"></p>            
+            <input type="submit" name="iscritti" value="Cerca"><br>
+        </form>
     </body>
 </html>
