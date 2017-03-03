@@ -56,42 +56,48 @@ public class addInfo extends HttpServlet {
             if(request.getParameter("storici")!=null){
                 out.println("<p>Storico</p>");
                 //obtain school
+                query="select * from scuola where nome='" + request.getParameter("scuolaI") + "'";
+                rset = smt.executeQuery(query);
+                
+                rset.next();
+                int cod = rset.getInt("cod");
+                
+                //obtain student
+                query="select * from studenti where nome='" + request.getParameter("nomeI") + "' and cognome='" + request.getParameter("cognomeI") + "'";
+                rset = smt.executeQuery(query);
+                
+                rset.next();
+                int stud = rset.getInt("cod");
+                
+                //obtain class
+                query="select * from classe where nome='" + request.getParameter("classeI") + "' and scuola='" + cod +"'";
+                rset = smt.executeQuery(query);
+                
+                rset.next();
+                int classe = rset.getInt("cod");
+                
+                query="insert into storico(studente,scuola,classe,anno) values("+ stud +"','"+cod +"','" + classe + "','" + request.getParameter("anno") +"')";
+                
+                out.println("<p>Storico</p>");
+            } else if(request.getParameter("scuole")!=null){
+                out.println("<p>Scuole</p>");
+                query="insert into scuola(nome, provincia, regione) values('" + request.getParameter("nome") + "','" + request.getParameter("provincia") + "','" + request.getParameter("regione") + "')";
+            } else if(request.getParameter("classi")!=null){//obtain school
                 query="select * from scuola where nome='" + request.getParameter("scuolaS") + "'";
                 rset = smt.executeQuery(query);
                 
                 rset.next();
                 int cod = rset.getInt("cod");
                 
+                query="insert into classe(nome,scuola,indirizzo,opzione) values("+request.getParameter("classe")+"','"+request.getParameter("scuolaS") +"','"+request.getParameter("indirizzo")+"','"+request.getParameter("opzione")+"')";
+                out.println("<p>Classi</p>");
+            } else if(request.getParameter("studenti")!=null){
                 //create student
-                query="insert into studenti(cognome,nome,luogonascita) values("+request.getParameter("nomeS")+"','"+request.getParameter("cognome") +"','vicenza')";
-                rset = smt.executeQuery(query);
-                
-                query="select * from studenti where nome='" + request.getParameter("nomes") + "'";
-                rset = smt.executeQuery(query);
-                
-                rset.next();
-                int stud = rset.getInt("cod");
-                
-                //create class
-                query="insert into classe(scuola,nome,indirizzo,opzione) values("+cod+"','"+request.getParameter("classe") +"','vicenza','vicenza')";
-                rset = smt.executeQuery(query);
-                
-                query="select * from classe where nome='" + request.getParameter("classe") + "'";
-                rset = smt.executeQuery(query);
-                
-                rset.next();
-                int classe = rset.getInt("cod");
-                
-                query="insert into storico(studente,scuola,classe,anno) values("+stud+"','"+cod +"','" + classe + "','" + request.getParameter("anno") +"')";
-                
-                out.println("<p>Storico</p>");
-            } else if(request.getParameter("scuole")!=null){
-                out.println("<p>Scuole</p>");
-                query="insert into scuola(nome, provincia, regione) values('" + request.getParameter("nome") + "','" + request.getParameter("provincia") + "','" + request.getParameter("regione") + "');";
-                out.println(query);
+                query="insert into studenti(cognome,nome,luogonascita,datanascita) values("+request.getParameter("nomeS")+"','"+request.getParameter("cognome") +"','"+request.getParameter("luogo")+"','"+request.getParameter("data")+"')";
+                out.println("<p>Studenti</p>");
             }
             
-            rset = smt.executeQuery(query);
+            smt.executeUpdate(query);
             
             out.println("</body>");
             out.println("</html>");
